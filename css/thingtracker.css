@@ -1,0 +1,54 @@
+body {
+	background: #e3edf9; /* Old browsers */
+	background: -moz-linear-gradient(left,  #e3edf9 0%, #ffffff 15%, #ffffff 85%, #e3edf9 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%,#e3edf9), color-stop(15%,#ffffff), color-stop(85%,#ffffff), color-stop(100%,#e3edf9)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(left,  #e3edf9 0%,#ffffff 15%,#ffffff 85%,#e3edf9 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(left,  #e3edf9 0%,#ffffff 15%,#ffffff 85%,#e3edf9 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(left,  #e3edf9 0%,#ffffff 15%,#ffffff 85%,#e3edf9 100%); /* IE10+ */
+	background: linear-gradient(to right,  #e3edf9 0%,#ffffff 15%,#ffffff 85%,#e3edf9 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e3edf9', endColorstr='#e3edf9',GradientType=1 ); /* IE6-9 */
+  	margin-top: 40px;
+}
+
+.home-hero-unit {
+	padding: 50px;
+  margin-top: 40px;
+  margin-bottom: 30px;
+	background-image: url(../img/hero1.jpg);
+	background-repeat: no-repeat;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+}
+
+
+.section {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+
+/* Featurettes
+------------------------- */
+
+.featurette-divider {
+  margin: 40px 0; /* Space out the Bootstrap <hr> more */
+}
+.featurette {
+  padding-top: 60px; /* Vertically center images part 1: add padding above and below text. */
+  overflow: hidden; /* Vertically center images part 2: clear their floats. */
+}
+/* Give some space on the sides of the floated elements so text doesn't run right into it. */
+.featurette-image.pull-left {
+  margin-right: 40px;
+}
+.featurette-image.pull-right {
+  margin-left: 40px;
+}
+
+/* Thin out the marketing headings */
+.featurette-heading {
+  font-size: 50px;
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -1px;
+}

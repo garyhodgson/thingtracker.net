@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<head>
+  <title>Thing Tracker Network - Tracker Validator</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+  <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+  
+  <link href="css/bootstrap/bootstrap.css" rel="stylesheet">
+  <link href="css/bootstrap/bootstrap-responsive.css" rel="stylesheet">
+  <link href="css/thingtracker.css" rel="stylesheet" media="screen" type="text/css">
+
+</head>
+<body>
+    <div id="navbar" class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">Thing Tracker Network</a>
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="active"><a href="#home">Home</a></li>
+            </ul>
+            <ul class="nav pull-right">
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Jump To <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li class="nav-header">Info</li>
+                  <li><a href="specification.html">Technical Spec</a></li>
+                  <li class="divider"></li>
+                  <li class="nav-header">Technical</li>
+                  <li><a href="validate.html">Tracker Validator</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container" id="home">
+
+      <div class="row-fluid">
+
+        <div class="span8 offset1">
+          <h2>Tracker Validator</h2>
+
+            <p>The text of a tracker can be pasted into the following input field in order to validate it against the current specification.</p>
+            <div id="notifications"></div>
+            <textarea id="incoming" rows="20" cols="50" class="span12">
+{
+  "things":[
+      {
+        "title": "example thing",
+        "URL": "http://example.com/examplething",
+        "author": "Mr Author"
+      }
+  ],
+  "trackers":[
+  ]
+}
+            </textarea>
+            <p>
+              <a class="btn" id="validate" href="#">Validate</a>
+              <a class="btn" id="clearForm" href="#">Clear</a>
+            </p>
+
+        </div>
+      </div>
+
+    
+      <hr>
+
+      <footer>
+        <small>&copy; 2012 Gary Hodgson.  Built with: <a href="http://twitter.github.com/bootstrap">Bootstrap</a>
+      </footer>
+    </div>
+
+  	<!-- Javascript -->
+
+    <script src="http://code.jquery.com/jquery-1.8.1.min.js"> </script>
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <script src="js/underscore/underscore.min.js"></script>
+    <script src="js/js-schema.min.js"></script>   
+
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <script type="text/javascript">
+
+      var validate = schema({
+          "things" : Array.of(
+              {
+                  "title": String,
+                  "URL": String,
+                  "*author": String,
+                  "*license": String,
+                  "*tags": Array.of(String),
+                  "*thumbnailURL": String,
+                  "*description": String
+              }
+          ),
+          "*trackers" : Array.of(
+              {
+                  "URL": String
+              }
+          )
+        });
+
+    	$(function(){
+        $('#clearForm').click(function(e) {
+          $('#incoming').val("");
+        });
+
+    		$('#validate').click(function(e) {
+          var notificationTemplate = _.template("<div class='alert alert-<%=level%>'><a class='close' data-dismiss='alert'>×</a><%=message%></div>");
+          var json = $.parseJSON($('#incoming').val());
+
+          if (validate(json)){
+            $('#notifications').prepend(notificationTemplate({level:"success",message:"Tracker is valid!"}));  
+          } else {
+            $('#notifications').prepend(notificationTemplate({level:"error",message:"Tracker is not valid!"}));
+          }
+          
+    		});
+    	});
+    </script>
+    
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-107923-8']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+  </body>
+</html>

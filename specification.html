@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+  <head>
+    <title>Thing Tracker Network - Specification</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+    
+    <link href="css/bootstrap/bootstrap.css" rel="stylesheet">
+    <link href="css/bootstrap/bootstrap-responsive.css" rel="stylesheet">
+    <link href="css/thingtracker.css" rel="stylesheet" media="screen" type="text/css">
+
+  </head>
+  <body data-spy="scroll" data-target="#navbar" data-offset="50">
+
+
+    <div id="navbar" class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">Thing Tracker Network</a>
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="active"><a href="#home">Home</a></li>
+              <li><a href="#definitions">Definitions</a></li>
+              <li><a href="#structure">Structure</a></li>
+              <li><a href="#example">Example</a></li>
+              <li><a href="#policy">Policy</a></li>
+              <li><a href="#processes">Process</a></li>
+            </ul>
+            <ul class="nav pull-right">
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Jump To <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li class="nav-header">Info</li>
+                  <li><a href="specification.html">Technical Spec</a></li>
+                  <li class="divider"></li>
+                  <li class="nav-header">Technical</li>
+                  <li><a href="validate.html">Tracker Validator</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="container section" id="home">
+
+      <h1>Thing Tracker Network Specification <span class="muted">[draft]</span></h1>
+
+      <p>The following is a draft version of the Thing Tracker Network specification.  It is meant as a starting point for further discussion.</p>
+
+      <hr>
+
+      <div id="definitions" class="section">
+        <h2>Definitions</h2>
+
+        <dl class="dl-horizontal">
+          <dt>Thing</dt>
+          <dd>An object or project (aka. a Physible) which is represented online through a webpage, e.g. 3D printer design, github project, etc.</dd>
+          <dt>Tracker</dt>
+          <dd>A json document available somewhere on the web which complies with the Thing Tracker Network Specification.</dd>
+          <dt>Tracker Service</dt>
+          <dd>A website, application, or web service which interacts with Trackers. For example a service may:
+            <ul>
+              <li>Format the tracker for easier browsing.</li>
+              <li>Provide search capabilities.</li>
+              <li>Allow submission and management of Things to the tracker.</li>
+            </ul>
+          </dd>
+        </dl>
+      </div>
+
+      <hr>
+
+      <div id="structure" class="row-fluid section">
+        <h2>Structure</h2>
+        <div class="span7">
+          <p>The json schema shown to the right defines the structure of a valid tracker document (shown in <a href="https://github.com/molnarg/js-schema">js-schema</a> format for conciseness).  The following table summarises the key aspects.</p>
+          <br>
+            <table class="table table-condensed">
+              <tbody>
+                <tr>
+                  <td rowspan="4">The tracker</td>
+                  <td><strong>may not</strong> be empty.</td>
+                  <td><small>So as to recognise whether a tracker has been correctly loaded.</small></td>
+                </tr>
+                <tr>
+                  <td><strong>must</strong> be an object</td>
+                  <td><small>As opposed to an array.</small></td>
+                </tr>
+                <tr>
+                  <td><strong>must</strong> contain an attribute with the name "things" and type of Array</td>
+                  <td><small>Subsequently referred to as a "things array".</small></td>
+                </tr>
+                <tr>
+                  <td><strong>may</strong> contain an attribute with the name "trackers" and type of Array </td>
+                  <td><small>Subsequently referred to as a "trackers array".</small></td>
+                </tr>
+                <tr>
+                  <td>The things array</td>
+                  <td><strong>may</strong> contain zero or more elements.</td>
+                  <td><small>An element is subsequently refererred to as a "thing element".</small></td>
+                </tr>
+                <tr>
+                  <td>The trackers array</td>
+                  <td><strong>may</strong> contain zero or more elements.</td>
+                  <td><small>An element is subsequently refererred to as a "child-tracker element".</small></td>
+                </tr>
+                <tr>
+                  <td rowspan="6">A thing element</td>
+                  <td><strong>must</strong> contain an attribute with the name "title" and type of String.</td>
+                  <td><small></small></td>
+                </tr>
+                <tr>
+                  <td><strong>must</strong> contain an attribute with the name "URL" and type of String.</td>
+                  <td><small></small></td>
+                </tr>
+                <tr>
+                  <td><strong>may</strong> contain an attribute with the name "license" and type of String.</td>
+                  <td><small></small></td>
+                </tr>
+                <tr>
+                  <td><strong>may</strong> contain an attribute with the name "tags" and type of Array.</td>
+                  <td><small></small></td>
+                </tr>
+                <tr>
+                  <td><strong>may</strong> contain an attribute with the name "thumbnailURL" and type of String.</td>
+                  <td><small></small></td>
+                </tr>
+                <tr>
+                  <td><strong>may</strong> contain an attribute with the name "description" and type of String.</td>
+                  <td><small></small></td>
+                </tr>
+                <tr>
+                  <td>A URL attribute</td>
+                  <td><strong>should</strong> be a valid Uniform Resource Locator.</td>
+                  <td><small></small></td>
+                </tr>
+                <tr>
+                  <td>A tags attribute</td>
+                  <td><strong>may</strong> contain zero or more elements of type String.</td>
+                  <td><small></small></td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+        <div class="span4">
+          <pre>
+schema({
+  "things" : Array.of(
+      {
+          "title": String,
+          "URL": String,
+          "*author": String,
+          "*license": String,
+          "*tags": Array.of(String),
+          "*thumbnailURL": String,
+          "*description": String
+      }
+  ),
+  "*trackers" : Array.of(
+      {
+          "URL": String
+      }
+  )
+})
+          </pre>  
+        </div>
+      </div>
+
+
+      <hr>
+
+
+      <div id="example" class="row-fluid section">
+        <h2>Example</h2>
+        <div class="span8">
+          <pre>
+{
+  "things":[
+      {
+        "title": "strandbeest",
+        "URL": "http://garyhodgson.github.com/strandbeest",
+        "author": "Gary Hodgson"
+      },
+      {
+        "title": "Mechanical Movement #27",
+        "URL": "http://garyhodgson.github.com/githubiverse-tst",
+        "author": "Gary Hodgson",
+        "license": "GPL3",
+        "tags": ["mechanical movement", "fun"],
+        "thumbnailURL": "https://github.com/garyhodgson/githubiverse-tst/raw/master/img/test-jig.jpg",
+        "description": "An implementation of movement #27 from \"501 Mechanical Movements\" by Henry T. Brown.\n\nThis is still a work in progress."
+      }
+  ],
+  "trackers":[
+    {
+      "URL":"http://reprap.development-tracker.info/thingtracker"
+    }
+  ]
+}
+          </pre>
+        </div>
+
+        <div class="span3">
+          <p>To the left is an example tracker which would validate against the above schema.  It shows two things and one child-tracker.</p>
+        </div>
+
+      </div>
+  	
+      <hr>
+      <div id="policy" class="row-fluid section">
+        <h2>Policy</h2>
+        <p>This section discusses how a tracker can notify others about how it processes data, and what others may expect from it.</p>
+        
+        <h4>Network Navigation Policy (or Tracker Recursion Policy)</h4>
+        <p>Would tell how many, if any, levels the tracker navigates into the network when it builds its list of things.  For example, a tracker may decide to only take the things described directly in the child tracker, and ignore any further grand-child trackers.  Another tracker may wish to index as many things as it can, acting as a search engine, and so may navigate through all trackers it can find.</p>
+
+
+      </div>
+
+
+      <hr>
+      <div id="processes" class="row-fluid section">
+        <h2>Process</h2>
+        <p>This section talks about the way trackers could operate.</p>
+
+  
+        <h4>Processing a tracker</h4>
+
+    		<p>When a tracker service scans a new tracker it would usually read the list of things and add them to it's own cache of things.  It may also scan the list of trackers that the tracker holds and choose whether to delve further into the network. Each service implementer makes the choice whether to do this depending on their own needs.  Some may go all the way down through the network in order to build a comprehensive search index, whereas others may only wish to read one or two levels deep.  By adding the new tracker to their list they then allow any further service who uses their data to make this decision themselves.  In this way the data is truly propagated throughout the network without degradation.</p>
+
+  
+    		<h4>Optionally provided data</h4>
+
+    		<p>A service which adds the things from a tracker will usually store the things so as to make them available for browsing.  An optional service is to make this cache of things also available alongside the tracker.  In this way each downstream service could choose to read this list of things instead of having to process the list of trackers itself.  Naturally the downstream service must decide whether the thing cache is suitable for its purposes. To this extent there is an aspect of trust involved, i.e. they must trust that the parent service has maintained the thing cache list and that it contains the data it requires.</p>
+
+      </div>
+
+      <hr>
+
+      <footer>
+        <small>&copy; 2012 Gary Hodgson.  Built with: <a href="http://twitter.github.com/bootstrap">Bootstrap</a>
+      </footer>
+
+    </div> <!-- /container -->
+
+    <!-- Javascript -->
+
+    <script src="http://code.jquery.com/jquery-1.8.1.min.js"> </script>
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+   
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-107923-8']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+  </body>
+</html>

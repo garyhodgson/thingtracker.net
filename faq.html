@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+  <head>
+    <title>Thing Tracker Network</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+    
+    <link href="css/bootstrap/bootstrap.css" rel="stylesheet">
+    <link href="css/bootstrap/bootstrap-responsive.css" rel="stylesheet">
+    <link href="css/thingtracker.css" rel="stylesheet" media="screen" type="text/css">
+
+  </head>
+  <body data-spy="scroll" data-target="#navbar" data-offset="0">
+
+    <div id="navbar" class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">Thing Tracker Network</a>
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="active"><a href="/">Home</a></li>
+            </ul>
+            <ul class="nav pull-right">
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Jump To <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li class="nav-header">Info</li>
+                  <li><a href="specification.html">Technical Spec</a></li>
+                  <li class="divider"></li>
+                  <li class="nav-header">Technical</li>
+                  <li><a href="validate.html">Tracker Validator</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container section" id="home">
+
+      <h1>Q &amp; A</h1>
+        <p>The information below attempts to anticipate questions that may arise whilst considering and discussing the Thing tracker Network.  If any question is not shown below, and you feel it would aid the discussion, then feel free to <a href="mailto:contact@garyhodgson.com">get in touch</a>.</p>
+        <p>Note: this page is not yet complete.</p>
+
+      <hr>
+
+      <div id="general" class="row-fluid section">
+        <h2>General</h2>
+
+        <dl>
+          <dt>What is a tracker?</dt>
+          <dd>talk about place to submit information about 3d printing designs.</dd>
+
+          <dt>Where do I host my files?</dt>
+          <dd>- explain why the tracker does not host files
+              - suggest github, personal hosting, reprap wiki, physibleexchange, thingiverse</dd>
+
+          <dt>What's to stop spam being entered in the network?</dt>
+          <dd>- network of trust &amp; spammy trackers will be ignored</dd>
+
+          <dt>Why should I login?</dt>
+          <dd>- ability to edit/remove your thing submission.</dd>
+
+          <dt>What personal data is stored in the tracker?</dt>
+          <dd>- none. email and oauth id used to hash an id to track submissions (for editing and deleting purposes)</dd>
+
+          <dt>What rights do I forfeit by adding my project/thing to a tracker?</dt>
+          <dd>Talk about distribution of information in the network</dd>
+
+          <dt>Can I register someone elses thing?</dt>
+          <dd></dd>
+
+          <dt>How do I set up my own tracker?</dt>
+          <dd></dd>
+        </dl>   
+      </div>
+      
+      <hr>
+
+      <div id="technical" class="row-fluid section">
+        <h2>Technical</h2>
+
+        <dl>
+          <dt>What is a tracker?</dt>
+          <dd>- talk about REST service</dd>
+
+          <dt>Security?</dt>
+          <dd></dd>
+
+          <dt>Where can a tracker reside?</dt>
+          <dd></dd>
+
+          <dt>How do I make my existing site ThingTracker compatible?</dt>
+          <dd>- add address serving a json document</dd>
+
+          <dt>How do I pull content from other trackers?</dt>
+          <dd>- read json document, optionally navigate through sub-trackers</dd>
+
+          <dt>How can I tell how up-to-date the content of the tracker is?</dt>
+          <dd>- compare hash of last update</dd>
+
+          <dt>What content is available?</dt>
+          <dd>- list of things registered on the tracker
+                  - list of trackers registered on the tracker
+                  - list of all things the tracker serves (including sub trackers)</dd>
+        </dl>
+
+      </div>
+
+      <hr>
+
+      <footer>
+      <small>&copy; 2012 Gary Hodgson.  Built with: <a href="http://twitter.github.com/bootstrap">Bootstrap</a>
+      </footer>
+
+    </div> <!-- /container -->
+
+    <!-- Javascript -->
+
+    <script src="http://code.jquery.com/jquery-1.8.1.min.js"> </script>
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+   
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-107923-8']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+
+  </body>
+</html>

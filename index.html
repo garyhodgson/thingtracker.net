@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+  <head>
+    <title>Thing Tracker Network</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+    
+    <link href="css/bootstrap/bootstrap.css" rel="stylesheet">
+    <link href="css/thingtracker.css" rel="stylesheet" media="screen" type="text/css">
+    <link href="css/bootstrap/bootstrap-responsive.css" rel="stylesheet">
+
+  </head>
+  <body data-spy="scroll" data-target="#navbar" data-offset="50">
+
+    <div id="navbar" class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">Thing Tracker Network</a>
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="active"><a href="#home">Home</a></li>
+              <li><a href="#overview">Overview</a></li>
+              <li><a href="#benefits">Benefits</a></li>
+              <li><a href="#specification">Specification</a></li>
+              <li><a href="#ecosystem">Ecosystem</a></li>
+              <li><a href="#info">What Next?</a></li>
+            </ul>
+            <ul class="nav pull-right">
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Jump To <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li class="nav-header">Info</li>
+                  <li><a href="specification.html">Technical Spec</a></li>
+                  <li class="divider"></li>
+                  <li class="nav-header">Technical</li>
+                  <li><a href="validate.html">Tracker Validator</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container" id="home">
+
+      <div class="hero-unit home-hero-unit">
+        <h1>Thing Tracker Network</h1>
+        <p><strong>A proposal on a way to discover and share 3D printer designs and projects.</strong></p>
+      </div>
+
+      <div class="row">
+        <div class="span4">
+          <h2>Rationale</h2>
+          <p>A major problem faced by anyone attempting to build a 3D model repository web application is that the established players have such a strong user base that it is difficult to convince users to submit their content and use the service</p>  
+          <p>The app has to have all the basics done right <em>plus</em> have features that makes it better than the competition for it to be successful.  Considering the diverse requirements of the 3D printing community this is a tall order to fulfill.</p>
+        </div>
+
+        <div class="span4">
+          <h2>Another Way</h2>
+          <p>Instead of producing yet another web application this site is dedicated to promoting a way in which existing, and future, apps could share their data to produce a web of things.</p>
+          <p>By sharing key metadata, apps could work together to form a truly decentralised network, where participants focus on their particular needs and yet be sure their work can be discovered and followed by the wider community.</p>
+        </div>
+
+        <div class="span4">
+          <h2>What Now?</h2>
+          <p>
+            <ul>
+              <li>Read the <a href="#overview">overview</a> of the proposal.</li>
+              <li>Consider the <a href="#benefits">benefits</a> of such a network.</li>
+              <li>Review the <a href="#specification">draft specification</a>.</li>
+              <li>Explore <a href="#ecosystem">ecosystem</a> of how the network might be implemented.</li>
+              <li><a href="#info">Engage</a> with the 3D printing community to discuss whether such a network would be of use.</li>
+              <li>Recommend on Google+:  <div class="g-plusone" data-size="small"></div></li>
+            </ul>
+          </p>
+        </div>
+
+      </div>
+
+      <hr class="featurette-divider">
+
+      <div class="featurette" id="overview">
+        <a name="overview"></a>
+        <img class="featurette-image pull-right thumbnail" src="img/overview1.jpg">
+        <h2 class="featurette-heading">Overview</h2>
+        <p class="lead">The proposal is as simple as it is powerful.</p>
+        <p>Anyone may participate in the network by simply making a list available online of the things they wish to track.  This is referred to as a <strong>tracker</strong>.</p>
+        <p>The things in the list should contain a set of required metadata which identify the thing and say where it can be found.  This metadata is defined in the <a href="#specification">specification</a>.  Optional metadata may also be defined.</p>
+        <p>The tracker list may also contain the addresses of other trackers.  In this way a network can be formed.</p>
+        <p>This proposal does not dictate how the list should be created or managed.  So long as the tracker complies with the core specification, users and services may implement them as they wish.  This gives a lot of flexibility in the type of services that may be developed to support the network (see <a href="#ecosystem">ecosystem</a> below).</p>
+      </div>
+
+      <hr class="featurette-divider">
+
+      <div class="featurette" id="benefits">
+        <a name="benefits"></a>
+        <img class="featurette-image pull-left thumbnail" src="img/benefits1.jpg">
+        <h2 class="featurette-heading">Benefits</h2>
+        <p class="lead">Why would anyone participate in such a network? Freedom, Choice, and Progress.</p>
+        <p>Say that you wanted to use a new, or specialised, service to host and present your new 3D printable widget, then you run the risk of it not being discovered by others simply because the service does not yet attract many visitors.  For this reason many feel obligated to use one of the large, established services, even if they would prefer not to.  However, if that new service is a participant in the Thing Tracker Network then information about your widget will be made available to all participants in the network so it can be picked up and indexed by search services, shown in other trackers and made easier to discover.</p>
+        
+        <p>Another use case: Say that your project team, hackerspace or group of friends wish to host and publish your designs on your own website.  In order to make them discoverable they would also have to also be submitted to an established service, such as Thingiverse.  But this would result in duplicated Things plus the headache of maintaining the information in both places.  By publishing a tracker on your team's website it can participate in the Thing Tracker Network and be tracked and discovered by others.</p>
+
+        <p>The current 3D printing ecosystem is ripe for competition and diversification in the field of 3D design repositories and services, yet innovation is being stifled by the simple fact that, without a large enough user base, many services do not attract content and traffic.  The Thing Tracker Network would spur progress by fostering the development of an ecosystem consisting of boutique repositories and services which can be discovered without first having a large user base.</p>
+
+        <!--<p><a class="btn btn-info" href="usecases.html"> Read more use cases »​</a></p>-->
+
+      </div>
+
+      <hr class="featurette-divider">
+
+      <div class="featurette" id="specification">
+        <a name="specification"></a>
+        <img class="featurette-image pull-right thumbnail" src="img/specification1.jpg">
+        <h2 class="featurette-heading">Specification</h2>
+        <p class="lead">A common understanding.</p>
+
+        <p>In order for participants to be able to share data within the network a common understanding must be established.  For this reason a specification is proposed which simply states the data that is required for one member to be able to successfully discover the things of another member.  It also allows a member to provide further, optional, data to aid the development of the ecosystem.</p>
+
+        <p>The core of the specification is a data interchange format.  A document is made available, in the common JSON format, which contains two lists.  One is a list of things that have been directly registered on this tracker.  Each thing must have a title and a URL which points to the address of where the thing is hosted.  Optionally, it may contain further metadata which further describes the thing.</p>
+
+        <p>The second list contains trackers that the current tracker also follows.  Each tracker is identified by a URL which points directly to the tracker.  Again, supplementary metadata may be available.</p>
+
+        <p>Note that the the list of things <strong>does not</strong> include all the things from the children trackers. This would pollute the tracker as a data source and result in much duplication.  More about this is given in the <a href="specification.html">technical specification</a>.</p>
+
+        <p>The specification also makes suggestions on how the data might be managed and supplemented in order to provide a rich set of information for downstream services.</p>
+
+        <p><a class="btn btn-info" href="specification.html"> Read the draft technical specification »​</a></p>
+
+      </div>
+
+      <hr class="featurette-divider">
+
+      <div class="featurette" id="ecosystem">
+        <a name="ecosystem"></a>
+        <img class="featurette-image pull-left thumbnail" src="img/examples1.jpg">
+        <h2 class="featurette-heading">Ecosystem</h2>
+        <p class="lead">An open, participatory culture.</p>
+        <p>Should the proposal gain traction there are many exciting possibilities that the network could lead to.  When smaller repositories no longer have to worry about attracting a critical mass of users they become able to focus on tailoring the solution they wish to offer.  For example, a tracker may choose to only follow things within a specific area of interest, say everything to do with <a href="http://reprap.development-tracker.info">RepRap development</a>, or only things for <a href="http://www.thingiverse.com/categories/toys-and-games">toys and games</a>.</p>
+        <p>People may also start to offer applications and services that support and develop the community, and in this way an ecosystem could develop.  Such services might include:</p>
+          <div class="span6">
+            <ul>
+              <li><strong>Search Engines</strong>, that index as much of the network as possible, i.e. a google-like über-tracker, or concentrate on specialised areas.</li>
+              <li><strong>Repositories</strong>, offering unique features and benefits for storing your 3D designs and projects.  Existing options include <a href="https://github.com/">Github</a>, the <a href="http://reprap.org/wiki/Main_Page">RepRap Wiki</a>, <a href="http://www.thingiverse.com">Thingiverse</a> and <a href="http://physibleexchange.com/">PhysibleExchange</a>, amongst others.</li>
+              <li><strong>Hosted Tracker Service</strong>, offering the ability for people to log in and register their own designs, or host their own personal tracker.</li>
+              <li><strong>All-in-one Services</strong>, allowing users to upload their designs and make them available in the Thing Tracker Network, perhaps offering social networking features aswell.  <a href="http://www.thingiverse.com">Thingiverse</a> is currently a prime example of a service offering similar functionality.</li>
+            </ul>
+          </div>
+        
+      </div>
+
+      <hr class="featurette-divider">
+
+      <div class="featurette" id="info">
+        <a name="info"></a>
+        <img class="featurette-image pull-right thumbnail" src="img/moreinformation1.jpg">
+        <h2 class="featurette-heading">What Next?</h2>
+        <!--
+        <p class="lead">More Information.</p>
+        <p>Whilst the core of the proposal is quite simple there are many ways it could positively impact the 3D printing community.  Trying to cover all these in one webpage isn't possible so the following resources may help answer any questions.</p>
+        <ul>
+          <li><a href="faq.html">Q &amp; A</a></li>
+        </ul>
+        -->
+        <br>
+        <p class="lead">A Call To Action.</p>
+        <p>For the proposal and the network to be successful it has to be discussed, vetted, argued about, and refined.  We call on anyone who agrees that the proposal has merit to raise the topic within the community, ask friends for opinions, bring it up at a hackerspace meeting, or simply <a href="mailto:contact@thingtracker.net">get in touch</a>, and say what you think.</p>
+      </div>
+    
+      <hr>
+
+     <footer>
+      <small>&copy; 2012 Gary Hodgson.  Built with: <a href="http://twitter.github.com/bootstrap">Bootstrap</a>
+    </footer>
+
+    </div> <!-- /container -->
+
+    <!-- Javascript -->
+
+    <script src="http://code.jquery.com/jquery-1.8.1.min.js"> </script>
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+   
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-107923-8']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    
+      window.___gcfg = {lang: 'en-GB'};
+
+      (function() {
+        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+        po.src = 'https://apis.google.com/js/plusone.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+      })();
+    </script>
+
+
+  </body>
+</html>
