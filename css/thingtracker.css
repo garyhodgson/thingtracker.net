@@ -10,17 +10,34 @@ body {
   	margin-top: 40px;
 }
 
-.home-hero-unit {
-	padding: 50px;
-  margin-top: 40px;
-  margin-bottom: 30px;
-	background-image: url(../img/hero1.jpg);
-	background-repeat: no-repeat;
+.my-hero-unit {
+	padding: 40px 20px 40px 20px;
+
+	margin-top: 40px;
+	margin-bottom: 30px;
 	-webkit-border-radius: 6px;
 	-moz-border-radius: 6px;
 	border-radius: 6px;
+	background-color: transparent;
+
+	font-size: 18px;
+	font-weight: 200;
+	line-height: 30px;
 }
 
+.my-hero-unit h1 {
+  margin-bottom: 0;
+  font-size: 60px;
+  line-height: 1;
+  letter-spacing: -1px;
+  color: inherit;
+}
+
+@media (min-width: 1200px) {
+	#my-hero-unit-title {
+		margin-top: 50px;
+	}
+}
 
 .section {
   padding-top: 50px;
@@ -37,6 +54,11 @@ body {
   padding-top: 60px; /* Vertically center images part 1: add padding above and below text. */
   overflow: hidden; /* Vertically center images part 2: clear their floats. */
 }
+
+.featurette-image {
+	border: 0;
+}
+
 /* Give some space on the sides of the floated elements so text doesn't run right into it. */
 .featurette-image.pull-left {
   margin-right: 40px;
