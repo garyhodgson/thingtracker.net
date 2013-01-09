@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<head>
+  <title>Thing Tracker Network - Tracker Viewer</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+  <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+  
+  <link href="css/bootstrap/bootstrap.css" rel="stylesheet">
+  <link href="css/bootstrap/bootstrap-responsive.css" rel="stylesheet">
+  <link href="css/thingtracker.css" rel="stylesheet" media="screen" type="text/css">
+
+</head>
+<body>
+    <div id="navbar" class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">Thing Tracker Network</a>
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="active"><a href="#viewer">Viewer</a></li>
+            </ul>
+            <ul class="nav pull-right">
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Jump To <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="/">Home</a></li>
+                  <li class="nav-header">Info</li>
+                  <li><a href="specification.html">Technical Spec</a></li>
+                  <li class="divider"></li>
+                  <li class="nav-header">Technical</li>
+                  <li><a href="validate.html">Tracker Validator</a></li>
+                  <li><a href="viewer.html">Tracker Viewer</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container" id="viewer">
+
+      <div class="row-fluid">
+
+        <div class="span12">
+          	<h2>Thing Tracker Viewer</h2>
+          	<br>
+            <p>Enter a Thing Tracker URL in the field below and hit View to show the things listed in it.</p>
+            <div id="notifications"></div>
+            <br>
+            <div>
+            	<label class="span2 offset1" style="text-align:center;line-height:2.4em">Tracker URL:</label>&nbsp;<input id="trackerURL" class="span6" type="text" value="http://thingtracker.net/example.tracker">
+            </div>
+        	<p class="span3 offset7">
+              <a class="btn" id="view" href="#">View</a>
+              <a class="btn" id="clear" href="#">Clear</a>
+              &nbsp;<img class="spinner" src="img/spinner.gif">
+            </p>
+        </div>
+      </div>
+
+      <hr class="span12">
+
+      <div id="things"></div>
+
+      <hr>
+
+		<footer>
+			<small>&copy; 2012 Gary Hodgson.  Built with: <a href="http://twitter.github.com/bootstrap">Bootstrap</a>.&nbsp;&nbsp;Graphics by: <a href="http://forums.reprap.org/profile.php?0,15209">pdesigns</a>.</small>
+		</footer>
+    </div>
+
+	<div class="row-fluid" id="thingtemplate">
+		<div class="span1"><img class="thumbnail lazy" src="img/box.png" data-original="img/box.png"></div>
+		<div class="span8 row">
+				<h4 class="span12 title"></h4>
+				<h5 class="span12 author"></h5>
+				<p  class="span12 description"></p>
+		</div>
+
+		<div class="span3 row-fluid">
+			<div class="span12"><i class="icon-tags" title="tags"></i>&nbsp;<span class="tags"></span></div>
+			<div class="span12"><i class="icon-file" title="License"></i>&nbsp;<span class="license">Unknown</span></div>
+		</div>
+
+		<hr class="span12">
+
+	</div>
+
+  	<!-- Javascript -->
+
+    <script src="http://code.jquery.com/jquery-1.8.1.min.js"> </script>
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <script src="js/underscore/underscore.min.js"></script>
+    <script src="js/jquery.lazyload.min.js" type="text/javascript"></script>
+
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <script type="text/javascript">
+
+	
+        $('#clear').click(function(e) {
+          $('#things')[0].innerHTML = "";
+        });	        
+
+		$('#view').click(function(e) {
+			var notificationTemplate = _.template("<div class='alert alert-<%=level%>'><a class='close' data-dismiss='alert'>×</a><%=message%></div>");
+			var trackerURL = $('#trackerURL').val();
+
+			if (_.isEmpty(trackerURL)){
+				$('#notifications').prepend(notificationTemplate({level:"error",message:"Tracker URL missing."}));
+				return;
+			}
+
+			$('.spinner').show();
+
+          	$.ajax({
+				url: 'getthingtracker.php',
+				data: {trackerURL: trackerURL},
+				success: function(data) {
+
+	          		$('#things')[0].innerHTML = "";
+
+					_.each(data.things, function(item) {
+						addThing(item);
+					});
+
+					$("img.lazy").lazyload();
+					$(window).scroll();
+					
+				},
+				error: function(jqXHR, textStatus, errorThrown) {
+					console.log(jqXHR, textStatus, errorThrown);
+					$('#notifications').prepend(notificationTemplate({level:"error",message:"An error occurred retrieving the tracker. ("+errorThrown+")"}));
+				},
+				complete: function(jqXHR, textStatus) {
+					$('.spinner').hide();
+				},
+			  	dataType: 'json'
+			});
+		});
+
+		function addThing(thing) {
+
+			var newThing = $("#thingtemplate").clone();
+			newThing.attr('id','');
+
+			if (thing.title){
+				var title = (thing.URL)? "<a href='"+thing.URL+"'>"+thing.title+"</a>" : thing.title;
+				$('.title', newThing).html(title);
+			}
+
+			if (thing.author){
+				$('.author', newThing).html("by "+thing.author);
+			} else {
+				$('.author', newThing).remove()
+			}
+
+			if (thing.thumbnailURL){
+				$('.thumbnail', newThing).attr('data-original', thing.thumbnailURL);
+			}
+
+			if (thing.tags){
+				var linkedTags = _.map(thing.tags, function(t) {
+					return _.template("<a href='#' data-tag='<%=t%>' class='tag'><span class='label'><%=t%></span></a>", {t:t});
+				});
+				$('.tags', newThing).html(linkedTags.join(' '));
+			}
+
+			if (thing.license){
+				$('.license', newThing).html(thing.license);
+			}
+
+			if (thing.description){
+				var desc = thing.description.replace(/\\r\\n|\\n/g, "<br />")
+				$('.description', newThing).html(desc);
+			} else {
+				$('.description', newThing).remove()
+			}
+					
+			newThing.show();
+			$('#things').append(newThing);
+		};
+
+		function getUrlParam( param ){
+	      param = param.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+	      var exp = "[\\?&]"+param+"=([^&#]*)";
+	      var regexp = new RegExp( exp ); 
+	      var results = regexp.exec( window.location.href );
+	      if( results == null ){
+	        return undefined;
+	      } else {
+	        return results[1];
+	      }
+	    };
+
+		$(function(){
+			var trackerURL = getUrlParam("trackerURL");
+			if (trackerURL !== undefined){
+				$('#trackerURL').val(trackerURL);
+				$('#view').click();
+			}
+    	});
+    </script>
+    
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-107923-8']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+  </body>
+</html>
