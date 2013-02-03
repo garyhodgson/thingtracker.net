@@ -106,12 +106,13 @@
     <script type="text/javascript">
 
 	
+		var notificationTemplate = _.template("<div class='alert alert-<%=level%>'><a class='close' data-dismiss='alert'>×</a><%=message%></div>");
+
         $('#clear').click(function(e) {
           $('#things')[0].innerHTML = "";
         });	        
 
 		$('#view').click(function(e) {
-			var notificationTemplate = _.template("<div class='alert alert-<%=level%>'><a class='close' data-dismiss='alert'>×</a><%=message%></div>");
 			var trackerURL = $('#trackerURL').val();
 
 			if (_.isEmpty(trackerURL)){
@@ -207,6 +208,7 @@
 				$('#trackerURL').val(trackerURL);
 				$('#view').click();
 			}
+
     	});
     </script>
     

@@ -1,5 +1,4 @@
 <?php
-
 	$trackerURL = isset($_GET['trackerURL'])?$_GET['trackerURL']:false;
 	if (!$trackerURL) {
 	   header("HTTP/1.0 400 Bad Request");
@@ -24,6 +23,7 @@
 
 	list( $header, $output ) = preg_split( '/([\r\n][\r\n])\\1/', curl_exec( $ch ), 2 );
 	curl_close($ch);
+
 
 	$ary_headers = explode("\n", $header);
 	foreach($ary_headers as $hdr) {

@@ -1,0 +1,3 @@
+[submodule "specification"]
+	path = specification
+	url = git@github.com:garyhodgson/thing-tracker-network.git

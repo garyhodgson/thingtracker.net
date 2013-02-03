@@ -52,23 +52,12 @@
 
             <p>The text of a tracker can be pasted into the following input field in order to validate it against the current specification.</p>
             <div id="notifications"></div>
-            <textarea id="incoming" rows="20" cols="50" class="span12">
-{
-  "things":[
-      {
-        "title": "example thing",
-        "URL": "http://example.com/examplething",
-        "author": "Mr Author"
-      }
-  ],
-  "trackers":[
-  ]
-}
-            </textarea>
-            <p>
+
+            <textarea id="incoming" rows="20" cols="50" class="span12"></textarea>
+            <div>
               <a class="btn" id="validate" href="#">Validate</a>
               <a class="btn" id="clearForm" href="#">Clear</a>
-            </p>
+            </div>
 
         </div>
       </div>
@@ -94,32 +83,30 @@
 
     <script type="text/javascript">
 
-      var validate = schema({
-          "things" : Array.of(
-              {
-                  "title": String,
-                  "URL": String,
-                  "*author": String,
-                  "*license": String,
-                  "*tags": Array.of(String),
-                  "*thumbnailURL": String,
-                  "*description": String
-              }
-          ),
-          "*trackers" : Array.of(
-              {
-                  "URL": String
-              }
-          )
-        });
+      var validate;
+      var notificationTemplate = _.template("<div class='alert alert-<%=level%>'><a class='close' data-dismiss='alert'>×</a><%=message%></div>");
 
     	$(function(){
-        $('#clearForm').click(function(e) {
-          $('#incoming').val("");
-        });
 
-    		$('#validate').click(function(e) {
-          var notificationTemplate = _.template("<div class='alert alert-<%=level%>'><a class='close' data-dismiss='alert'>×</a><%=message%></div>");
+        $.get('specification/examples/example-tracker.json', function(data){
+          $('#incoming').val(data);
+        }, 'text');
+    	});
+
+      $('#clearForm').click(function(e) {
+        $('#incoming').val("");
+      });
+
+      $('#validate').click(function(e) {
+
+        $.get('specification/specification/schema.json', function(data){
+          try {
+            validate = schema.fromJSON(data);
+          } catch (e){
+            $('#notifications').prepend(notificationTemplate({level:"error",message:"Error loading schema. " + e}));  
+            return;
+          }
+
           var json = $.parseJSON($('#incoming').val());
 
           if (validate(json)){
@@ -127,9 +114,10 @@
           } else {
             $('#notifications').prepend(notificationTemplate({level:"error",message:"Tracker is not valid!"}));
           }
-          
-    		});
-    	});
+
+        });
+        
+      });
     </script>
     
     <script type="text/javascript">
