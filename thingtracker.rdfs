@@ -1,0 +1,74 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix cc: <http://creativecommons.org/ns#> .
+@prefix ttn: <http://thingtracker.net/thingtracker.rdfs#> .
+
+<>
+  rdf:type owl:Ontology ;
+  rdfs:label "Thing Tracker Network Things Vocabulary" ;
+  dcterms:creator <http://garyhodgson.com/#me> ;
+  dcterms:date "2013-02-11"^^xsd:date ;
+  cc:license <http://creativecommons.org/licenses/by-sa/3.0/> .
+
+ttn:Thing
+        rdf:type rdfs:Class;
+        rdfs:label "Thing";
+        rdfs:comment "Class of all things".
+
+ttn:Maintainer
+        rdf:type rdfs:Class;
+        rdfs:label "Maintainer";
+        rdfs:comment "Maintainer";
+        rdfs:subClassOf foaf:Agent.
+
+ttn:title
+        rdf:type owl:ObjectProperty;
+        rdfs:label "title";
+        rdfs:comment "Title of the thing";
+        rdfs:domain ttn:Thing.
+
+ttn:author
+        rdf:type owl:ObjectProperty;
+        rdfs:label "author";
+        rdfs:comment "an author of the thing";
+        rdfs:domain ttn:Maintainer;
+        rdfs:domain ttn:Thing.
+
+ttn:description
+        rdf:type owl:ObjectProperty;
+        rdfs:label "description";
+        rdfs:comment "the description of the thing";
+        rdfs:domain ttn:Thing.
+
+ttn:url
+        rdf:type owl:ObjectProperty;
+        rdfs:label "url";
+        rdfs:comment "the url of the thing";
+        rdfs:domain ttn:Thing.
+
+ttn:license
+        rdf:type owl:ObjectProperty;
+        rdfs:label "license";
+        rdfs:comment "a license of the thing";
+        rdfs:domain ttn:Thing.
+
+ttn:thumbnail
+        rdf:type owl:ObjectProperty;
+        rdfs:label "thumbnail";
+        rdfs:comment "a thumbnail of the thing";
+        rdfs:domain ttn:Thing.
+
+ttn:created
+        rdf:type owl:ObjectProperty;
+        rdfs:label "created";
+        rdfs:comment "when the thing was created";
+        rdfs:domain ttn:Thing.
+
+ttn:updated
+        rdf:type owl:ObjectProperty;
+        rdfs:label "updated";
+        rdfs:comment "when the thing was last updated";
+        rdfs:domain ttn:Thing.
