@@ -1,0 +1,2 @@
+Redirect 302 /viewer.html /tools/viewer
+Redirect 302 /validate.html /tools/validator

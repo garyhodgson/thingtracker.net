@@ -3,11 +3,11 @@
   <title>Thing Tracker Network - Tracker Validator</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-  <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+  <link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
   
-  <link href="css/bootstrap/bootstrap.css" rel="stylesheet">
-  <link href="css/bootstrap/bootstrap-responsive.css" rel="stylesheet">
-  <link href="css/thingtracker.css" rel="stylesheet" media="screen" type="text/css">
+  <link href="/css/bootstrap/bootstrap.css" rel="stylesheet">
+  <link href="/css/bootstrap/bootstrap-responsive.css" rel="stylesheet">
+  <link href="/css/thingtracker.css" rel="stylesheet" media="screen" type="text/css">
 
 </head>
 <body>
@@ -30,11 +30,12 @@
                 <ul class="dropdown-menu">
                   <li><a href="/">Home</a></li>
                   <li class="nav-header">Info</li>
-                  <li><a href="specification.html">Technical Spec</a></li>
+                  <li><a href="/specification.html">Technical Spec</a></li>
                   <li class="divider"></li>
                   <li class="nav-header">Technical</li>
-                  <li><a href="validate.html">Tracker Validator</a></li>
-                  <li><a href="viewer.html">Tracker Viewer</a></li>
+                  <li><a href="/tools/validator">Tracker Validator</a></li>
+                  <li><a href="/tools/viewer">Tracker Viewer</a></li>
+                  <li><a href="/tools/thingmaker">BitTorrent ThingMaker</a></li>
                 </ul>
               </li>
             </ul>
@@ -73,9 +74,9 @@
   	<!-- Javascript -->
 
     <script src="http://code.jquery.com/jquery-1.8.1.min.js"> </script>
-    <script src="js/bootstrap/bootstrap.min.js"></script>
-    <script src="js/underscore/underscore.min.js"></script>
-    <script src="js/js-schema.min.js"></script>   
+    <script src="/js/bootstrap/bootstrap.min.js"></script>
+    <script src="/js/underscore/underscore.min.js"></script>
+    <script src="/js/js-schema.min.js"></script>   
 
     <!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -88,7 +89,7 @@
 
     	$(function(){
 
-        $.get('specification/examples/example-tracker.json', function(data){
+        $.get('/specification/examples/example-tracker.json', function(data){
           $('#incoming').val(data);
         }, 'text');
     	});
@@ -99,7 +100,7 @@
 
       $('#validate').click(function(e) {
 
-        $.get('specification/specification/schema.json', function(data){
+        $.get('/specification/specification/schema.json', function(data){
           try {
             validate = schema.fromJSON(data);
           } catch (e){

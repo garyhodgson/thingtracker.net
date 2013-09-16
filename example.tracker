@@ -2,12 +2,12 @@
   "things":[
       {
         "title": "strandbeest",
-        "URL": "http://garyhodgson.github.com/strandbeest",
+        "URL": "http://garyhodgson.github.io/strandbeest/",
         "author": "Gary Hodgson"
       },
       {
         "title": "Mechanical Movement #27",
-        "URL": "http://garyhodgson.github.com/githubiverse-tst",
+        "URL": "http://garyhodgson.github.io/mechanical-movement-27/",
         "author": "Gary Hodgson",
         "license": "GPL3",
         "tags": ["mechanical movement", "fun"],

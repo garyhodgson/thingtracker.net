@@ -3,11 +3,11 @@
   <title>Thing Tracker Network - Tracker Viewer</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-  <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+  <link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
   
-  <link href="css/bootstrap/bootstrap.css" rel="stylesheet">
-  <link href="css/bootstrap/bootstrap-responsive.css" rel="stylesheet">
-  <link href="css/thingtracker.css" rel="stylesheet" media="screen" type="text/css">
+  <link href="/css/bootstrap/bootstrap.css" rel="stylesheet">
+  <link href="/css/bootstrap/bootstrap-responsive.css" rel="stylesheet">
+  <link href="/css/thingtracker.css" rel="stylesheet" media="screen" type="text/css">
 
 </head>
 <body>
@@ -30,11 +30,12 @@
                 <ul class="dropdown-menu">
                   <li><a href="/">Home</a></li>
                   <li class="nav-header">Info</li>
-                  <li><a href="specification.html">Technical Spec</a></li>
+                  <li><a href="/specification.html">Technical Spec</a></li>
                   <li class="divider"></li>
                   <li class="nav-header">Technical</li>
-                  <li><a href="validate.html">Tracker Validator</a></li>
-                  <li><a href="viewer.html">Tracker Viewer</a></li>
+                  <li><a href="/tools/validator">Tracker Validator</a></li>
+                  <li><a href="/tools/viewer">Tracker Viewer</a></li>
+                  <li><a href="/tools/thingmaker">BitTorrent ThingMaker</a></li>
                 </ul>
               </li>
             </ul>
@@ -59,7 +60,7 @@
         	<p class="span3 offset7">
               <a class="btn" id="view" href="#">View</a>
               <a class="btn" id="clear" href="#">Clear</a>
-              &nbsp;<img class="spinner" src="img/spinner.gif">
+              &nbsp;<img class="spinner" src="/img/spinner.gif">
             </p>
         </div>
       </div>
@@ -76,7 +77,7 @@
     </div>
 
 	<div class="row-fluid" id="thingtemplate">
-		<div class="span1"><img class="thumbnail lazy" src="img/box.png" data-original="img/box.png"></div>
+		<div class="span1"><img class="thumbnail lazy" src="/img/box.png" data-original="/img/box.png"></div>
 		<div class="span8 row">
 				<h4 class="span12 title"></h4>
 				<h5 class="span12 author"></h5>
@@ -95,9 +96,9 @@
   	<!-- Javascript -->
 
     <script src="http://code.jquery.com/jquery-1.8.1.min.js"> </script>
-    <script src="js/bootstrap/bootstrap.min.js"></script>
-    <script src="js/underscore/underscore.min.js"></script>
-    <script src="js/jquery.lazyload.min.js" type="text/javascript"></script>
+    <script src="/js/bootstrap/bootstrap.min.js"></script>
+    <script src="/js/underscore/underscore.min.js"></script>
+    <script src="/js/jquery.lazyload.min.js" type="text/javascript"></script>
 
     <!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -123,7 +124,7 @@
 			$('.spinner').show();
 
           	$.ajax({
-				url: 'getthingtracker.php',
+				url: '/getthingtracker.php',
 				data: {trackerURL: trackerURL},
 				success: function(data) {
 
