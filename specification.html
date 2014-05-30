@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
     <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
-    
+
     <link href="css/bootstrap/bootstrap.css" rel="stylesheet">
     <link href="css/bootstrap/bootstrap-responsive.css" rel="stylesheet">
     <link href="css/thingtracker.css" rel="stylesheet" media="screen" type="text/css">
@@ -86,7 +86,7 @@
       <div id="structure" class="row-fluid section">
         <h2>Structure</h2>
         <div class="span7">
-          <p>The json schema shown to the right defines the structure of a valid tracker document (shown in <a href="https://github.com/molnarg/js-schema">js-schema</a> format for conciseness).  The following table summarises the key aspects.</p>
+          <p>The json schema shown to the right shows a subset of the structure of a valid tracker document (shown in <a href="https://github.com/molnarg/js-schema">js-schema</a> format for conciseness).  The following table summarises the key aspects.</p>
           <br>
             <table class="table table-condensed">
               <tbody>
@@ -94,6 +94,10 @@
                   <td rowspan="4">The tracker</td>
                   <td><strong>may not</strong> be empty.</td>
                   <td><small>So as to recognise whether a tracker has been correctly loaded.</small></td>
+                </tr>
+                <tr>
+                  <td><strong>must</strong> contain an attribute with the name "id" and type of String.</td>
+                  <td><small></small></td>
                 </tr>
                 <tr>
                   <td><strong>must</strong> be an object</td>
@@ -119,11 +123,15 @@
                 </tr>
                 <tr>
                   <td rowspan="6">A thing element</td>
+                  <td><strong>must</strong> contain an attribute with the name "id" and type of String.</td>
+                  <td><small></small></td>
+                </tr>
+                <tr>
                   <td><strong>must</strong> contain an attribute with the name "title" and type of String.</td>
                   <td><small></small></td>
                 </tr>
                 <tr>
-                  <td><strong>must</strong> contain an attribute with the name "URL" and type of String.</td>
+                  <td><strong>may</strong> contain an attribute with the name "URL" and type of String.</td>
                   <td><small></small></td>
                 </tr>
                 <tr>
@@ -158,10 +166,12 @@
         <div class="span4">
           <pre>
 schema({
+  "id" : String,
   "things" : Array.of(
       {
+          "id" : String,
           "title": String,
-          "URL": String,
+          "*url": String,
           "*author": String,
           "*license": String,
           "*tags": Array.of(String),
@@ -171,11 +181,11 @@ schema({
   ),
   "*trackers" : Array.of(
       {
-          "URL": String
+          "url": String
       }
   )
 })
-          </pre>  
+          </pre>
         </div>
       </div>
 
@@ -188,25 +198,28 @@ schema({
         <div class="span8">
           <pre>
 {
+  "description": "An Example Thing Tracker.",
   "things":[
       {
+        "id":"cdebf011-e999-4dc5-b4c2-c4163f5584a0",
         "title": "strandbeest",
-        "URL": "http://garyhodgson.github.com/strandbeest",
+        "url": "http://garyhodgson.github.com/strandbeest",
         "author": "Gary Hodgson"
       },
       {
+        "id":"f8736600-ff82-4a92-a5e9-fdeeeeb259fe",
         "title": "Mechanical Movement #27",
-        "URL": "http://garyhodgson.github.com/githubiverse-tst",
+        "url": "http://garyhodgson.github.com/githubiverse-tst",
         "author": "Gary Hodgson",
         "license": "GPL3",
         "tags": ["mechanical movement", "fun"],
-        "thumbnailURL": "https://github.com/garyhodgson/githubiverse-tst/raw/master/img/test-jig.jpg",
+        "thumbnailUrl": "https://github.com/garyhodgson/githubiverse-tst/raw/master/img/test-jig.jpg",
         "description": "An implementation of movement #27 from &amp;quot;501 Mechanical Movements&amp;quot; by Henry T. Brown.\\n\\nThis is still a work in progress."
       }
   ],
   "trackers":[
     {
-      "URL":"http://reprap.development-tracker.info/thingtracker"
+      "url":"http://reprap.development-tracker.info/thingtracker"
     }
   ]
 }
@@ -219,12 +232,56 @@ schema({
         </div>
 
       </div>
-  	
+
+      <div id="scalability" class="row-fluid section">
+        <h2>Scalability</h2>
+        <div class="span5">
+          <p>To address the <a href="https://github.com/garyhodgson/thing-tracker-network/issues/13">issue of scalability</a> a tracker may be also be structured in a different way.  A small tracker with only a handful of things would be adequately covered by a single Tracker, however even a modest number of Things would cause the size of this object to become unwieldy.  The solution is to have the Tracker reference a separate JSON object for each Thing, each located in it's own resource.  This is accomplished by means of the "refUrl" attribute.</p>
+
+          <p>To aid clients and services it is probably sensible to also provide some minimal metadata in the root tracker object, such as the title of the Thing, so they can retrieve some of the information without having to perform a request for each Thing in turn.</p>
+        </div>
+
+        <div class="span6">
+          <h3>Example</h3>
+          <h4>Root Tracker</h4>
+  <pre>
+  {
+    "description": "An Example Thing Tracker with referenced Things.",
+    "things":[
+        {
+          "title": "Mechanical Movement #27",
+          "refUrl": "/thing/f8736600-ff82-4a92-a5e9-fdeeeeb259fe"
+        }
+    ],
+    "trackers":[
+      {
+        "url":"http://reprap.development-tracker.info/thingtracker"
+      }
+    ]
+  }
+          </pre>
+          <h4>Thing at url "/thing/f8736600-ff82-4a92-a5e9-fdeeeeb259fe"</h4>
+          <pre>
+  {
+    "id":"f8736600-ff82-4a92-a5e9-fdeeeeb259fe",
+    "title": "Mechanical Movement #27",
+    "url": "http://garyhodgson.github.com/githubiverse-tst",
+    "author": "Gary Hodgson",
+    "license": "GPL3",
+    "tags": ["mechanical movement", "fun"],
+    "thumbnailUrl": "https://github.com/garyhodgson/githubiverse-tst/raw/master/img/test-jig.jpg",
+    "description": "An implementation of movement #27 from &amp;quot;501 Mechanical Movements&amp;quot; by Henry T. Brown.\\n\\nThis is still a work in progress."
+  }
+            </pre>
+
+        </div>
+      </div>
+
       <hr>
       <div id="policy" class="row-fluid section">
         <h2>Policy</h2>
         <p>This section discusses how a tracker can notify others about how it processes data, and what others may expect from it.</p>
-        
+
         <h4>Network Navigation Policy (or Tracker Recursion Policy)</h4>
         <p>Would tell how many, if any, levels the tracker navigates into the network when it builds its list of things.  For example, a tracker may decide to only take the things described directly in the child tracker, and ignore any further grand-child trackers.  Another tracker may wish to index as many things as it can, acting as a search engine, and so may navigate through all trackers it can find.</p>
 
@@ -237,12 +294,12 @@ schema({
         <h2>Process</h2>
         <p>This section talks about the way trackers could operate.</p>
 
-  
+
         <h4>Processing a tracker</h4>
 
     		<p>When a tracker service scans a new tracker it would usually read the list of things and add them to it's own cache of things.  It may also scan the list of trackers that the tracker holds and choose whether to delve further into the network. Each service implementer makes the choice whether to do this depending on their own needs.  Some may go all the way down through the network in order to build a comprehensive search index, whereas others may only wish to read one or two levels deep.  By adding the new tracker to their list they then allow any further service who uses their data to make this decision themselves.  In this way the data is truly propagated throughout the network without degradation.</p>
 
-  
+
     		<h4>Optionally provided data</h4>
 
     		<p>A service which adds the things from a tracker will usually store the things so as to make them available for browsing.  An optional service is to make this cache of things also available alongside the tracker.  In this way each downstream service could choose to read this list of things instead of having to process the list of trackers itself.  Naturally the downstream service must decide whether the thing cache is suitable for its purposes. To this extent there is an aspect of trust involved, i.e. they must trust that the parent service has maintained the thing cache list and that it contains the data it requires.</p>
@@ -261,7 +318,7 @@ schema({
 
     <script src="http://code.jquery.com/jquery-1.8.1.min.js"> </script>
     <script src="js/bootstrap/bootstrap.min.js"></script>
-   
+
     <!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
